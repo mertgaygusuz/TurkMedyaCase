@@ -15,7 +15,7 @@ namespace TurkMedyaAPI.Services
             _httpClient = httpClient;
         }
 
-        public async Task<List<NewsItem>> GetNewsItems(int page, int pageSize, string category, string keyword)
+        public async Task<List<NewsItem>> GetNewsItems(int page, int pageSize, string category, string keyword) //HomeControllerdan gelen isteğe göre anahtar ya da kategori girildiyse onları filtreliyorum ve sayfa geçişi için kullanıyorum.
         {
             var response = await _httpClient.GetStringAsync("https://www.turkmedya.com.tr/anasayfa.json");
             var newsData = JsonConvert.DeserializeObject<NewsData>(response);
@@ -38,11 +38,17 @@ namespace TurkMedyaAPI.Services
                 .ToList();
         }
 
-        public async Task<NewsItem> GetNewsDetail(string itemId)
+        public async Task<NewsItem> GetNewsDetail(string itemId) //HomeControllerdan gelen isteğe göre ilgili detayı buluyor eğer yoksa null gönderiyor.
         {
             var response = await _httpClient.GetStringAsync("https://www.turkmedya.com.tr/detay.json");
             var newsDetail = JsonConvert.DeserializeObject<NewsDetail>(response);
-            return newsDetail.Data.NewsDetail;
+
+            if (newsDetail.Data.NewsDetail.ItemId == itemId)
+            {
+                return newsDetail.Data.NewsDetail;
+            }
+            return null;
         }
+
     }
 }

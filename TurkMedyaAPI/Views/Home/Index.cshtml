@@ -16,7 +16,7 @@
         flex: 1;
     }
 
-        .news-image img {
+        .news-image img { 
             max-width: 100%;
             height: auto;
         }
@@ -87,7 +87,7 @@
         <div class="news-content">
             <h3>@item.Title</h3>
             <p>@item.ShortText</p>
-            <a class="detail-link" asp-controller="Home" asp-action="Detail" asp-route-id="@item.ItemId">Detaya git</a>
+            <button class="detail-link" onclick="goToDetail('@item.ItemId')">Detaya git</button>
         </div>
     </div>
 }
@@ -100,3 +100,9 @@
     Sayfa @ViewBag.CurrentPage
     <button onclick="location.href='@Url.Action("Index", new { page = ViewBag.CurrentPage + 1, category = ViewBag.Category, keyword = ViewBag.Keyword })'">İleri</button>
 </div>
+
+<script>
+    function goToDetail(itemId) {
+        window.location.href = '@Url.Action("Detail", "Home")/' + itemId;
+    }
+</script>

@@ -1,12 +1,21 @@
 ﻿@model TurkMedyaAPI.Models.NewsItem
 
 @{
-    ViewBag.Title = "Haber Detayı";
+     ViewBag.Title = "Haber Detayı";
 }
 
-<h2>@Model.Title</h2>
-@if (!string.IsNullOrEmpty(Model.ImageUrl))
+<h2>@ViewBag.Title</h2>
+
+@if (Model != null)
 {
-    <img src="@Model.ImageUrl" alt="@Model.Title" style="max-width: 100%; height: auto;" />
+    <h2>@Model.Title</h2>
+    @if (!string.IsNullOrEmpty(Model.ImageUrl))
+    {
+        <img src="@Model.ImageUrl" alt="@Model.Title" style="max-width: 100%; height: auto;" />
+    }
+    <p>@Model.ShortText</p>
 }
-<p>@Model.ShortText</p>
+else
+{
+    <p>Id mevcut değil</p>
+}

@@ -13,7 +13,7 @@ namespace TurkMedyaAPI.Controllers
             _newsService = newsService;
         }
 
-        public async Task<IActionResult> Index(int page = 1, string category = "", string keyword = "")
+        public async Task<IActionResult> Index(int page = 1, string category = "", string keyword = "") // Bu mettotta sayfa geçişleri ve ilgili kategorileri, anahtar kelimeyi Index kısmından gönderip Servis katmanına iletiyorum.
         {
             int pageSize = 5;
             var newsItems = await _newsService.GetNewsItems(page, pageSize, category, keyword);
@@ -23,7 +23,7 @@ namespace TurkMedyaAPI.Controllers
             return View(newsItems);
         }
 
-        public async Task<IActionResult> Detail(string id)
+        public async Task<IActionResult> Detail(string id) //Bu metotta Index.cshtml kısmında tıklanan haberin itemIdsini alıp Servis katmanındaki ilgili metoda gönderiyorum.
         {
             var newsDetail = await _newsService.GetNewsDetail(id);
             return View(newsDetail);
