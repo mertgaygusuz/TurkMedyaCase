@@ -1,20 +1,20 @@
 ﻿@model List<TurkMedyaAPI.Models.NewsItem>
 
 @{
-    ViewBag.Title = "Home Page";
+    ViewBag.Title = "Ana Sayfa";
 }
 
-<h2>News List</h2>
+<h2>Haber Listesi</h2>
 
 <form method="get" asp-controller="Home" asp-action="Index">
-    <input type="text" name="keyword" placeholder="Keyword" value="@ViewBag.Keyword" />
+    <input type="text" name="keyword" placeholder="Anahtar Kelime" value="@ViewBag.Keyword" />
     <select name="category">
-        <option value="">All</option>
+        <option value="">TÜMÜ</option>
         <option value="GÜNCEL" @(ViewBag.Category == "GÜNCEL" ? "selected" : "")>GÜNCEL</option>
         <option value="DÜNYA" @(ViewBag.Category == "DÜNYA" ? "selected" : "")>DÜNYA</option>
         <option value="SPOR" @(ViewBag.Category == "SPOR" ? "selected" : "")>SPOR</option>
     </select>
-    <button type="submit">Filter</button>
+    <button type="submit">Filtrele</button>
 </form>
 
 @foreach (var item in Model)
@@ -23,10 +23,10 @@
         <h3>@item.Title</h3>
         @if (!string.IsNullOrEmpty(item.ImageUrl))
         {
-            <img src="@item.ImageUrl" alt="@item.Title" style="max-width: 100px; max-height: 100px;" />
+            <img src="@item.ImageUrl" alt="@item.Title" style="max-width: 50%; height: auto;" />
         }
         <p>@item.ShortText</p>
-        <a asp-controller="Home" asp-action="Detail" asp-route-id="@item.ItemId">Read More</a>
+        <a asp-controller="Home" asp-action="Detail" asp-route-id="@item.ItemId">Detaya git</a>
     </div>
 }
 
@@ -35,6 +35,6 @@
     {
         <a asp-controller="Home" asp-action="Index" asp-route-page="@(ViewBag.CurrentPage - 1)">Previous</a>
     }
-    Page @ViewBag.CurrentPage
-    <a asp-controller="Home" asp-action="Index" asp-route-page="@(ViewBag.CurrentPage + 1)">Next</a>
+    Sayfa @ViewBag.CurrentPage
+    <a asp-controller="Home" asp-action="Index" asp-route-page="@(ViewBag.CurrentPage + 1)">İleri</a>
 </div>

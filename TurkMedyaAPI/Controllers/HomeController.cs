@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 
 namespace TurkMedyaAPI.Controllers
 {
-    public class HomeController: Controller
+    public class HomeController : Controller
     {
         private readonly INewsService _newsService;
 
@@ -25,8 +25,8 @@ namespace TurkMedyaAPI.Controllers
 
         public async Task<IActionResult> Detail(string id)
         {
-            var newsItem = await _newsService.GetNewsDetail(id);
-            return View(newsItem);
+            var newsDetail = await _newsService.GetNewsDetail(id);
+            return View(newsDetail);
         }
     }
 }
