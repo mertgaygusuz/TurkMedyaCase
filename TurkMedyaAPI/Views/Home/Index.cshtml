@@ -4,6 +4,64 @@
     ViewBag.Title = "Ana Sayfa";
 }
 
+<style>
+    .news-item {
+        display: flex;
+        margin-bottom: 20px;
+        border-bottom: 1px solid #ccc;
+        padding-bottom: 20px;
+    }
+
+    .news-image {
+        flex: 1;
+    }
+
+        .news-image img {
+            max-width: 100%;
+            height: auto;
+        }
+
+    .news-content {
+        flex: 2;
+        padding-left: 20px;
+    }
+
+        .news-content h3 {
+            margin: 0;
+        }
+
+        .news-content p {
+            margin: 10px 0;
+        }
+
+    .detail-link {
+        display: inline-block;
+        margin-top: 10px;
+        color: blue;
+        text-decoration: underline;
+        cursor: pointer;
+    }
+
+    .pagination {
+        margin-top: 20px;
+    }
+
+        .pagination button {
+            display: inline-block;
+            margin: 0 5px;
+            padding: 5px 10px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+
+            .pagination button:hover {
+                background-color: #0056b3;
+            }
+</style>
+
 <h2>Haber Listesi</h2>
 
 <form method="get" asp-controller="Home" asp-action="Index" style="margin-bottom: 20px;">
@@ -19,26 +77,26 @@
 
 @foreach (var item in Model)
 {
-    <div style="display: flex; margin-bottom: 20px;">
+    <div class="news-item">
         @if (!string.IsNullOrEmpty(item.ImageUrl))
         {
-            <div style="flex: 1;">
-                <img src="@item.ImageUrl" alt="@item.Title" style="max-width: 100%; height: auto;" />
+            <div class="news-image">
+                <img src="@item.ImageUrl" alt="@item.Title" />
             </div>
         }
-        <div style="flex: 2; padding-left: 20px;">
+        <div class="news-content">
             <h3>@item.Title</h3>
             <p>@item.ShortText</p>
-            <a asp-controller="Home" asp-action="Detail" asp-route-id="@item.ItemId">Detaya git</a>
+            <a class="detail-link" asp-controller="Home" asp-action="Detail" asp-route-id="@item.ItemId">Detaya git</a>
         </div>
     </div>
 }
 
-<div>
+<div class="pagination">
     @if (ViewBag.CurrentPage > 1)
     {
-        <a asp-controller="Home" asp-action="Index" asp-route-page="@(ViewBag.CurrentPage - 1)">Geri</a>
+        <button onclick="location.href='@Url.Action("Index", new { page = ViewBag.CurrentPage - 1, category = ViewBag.Category, keyword = ViewBag.Keyword })'">Geri</button>
     }
     Sayfa @ViewBag.CurrentPage
-    <a asp-controller="Home" asp-action="Index" asp-route-page="@(ViewBag.CurrentPage + 1)">İleri</a>
+    <button onclick="location.href='@Url.Action("Index", new { page = ViewBag.CurrentPage + 1, category = ViewBag.Category, keyword = ViewBag.Keyword })'">İleri</button>
 </div>
