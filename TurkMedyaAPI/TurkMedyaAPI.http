@@ -1,0 +1,6 @@
+@TurkMedyaAPI_HostAddress = http://localhost:5249
+
+GET {{TurkMedyaAPI_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

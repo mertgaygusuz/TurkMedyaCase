@@ -1,0 +1,10 @@
+﻿@model TurkMedyaAPI.Models.NewsItem
+
+@{
+    ViewBag.Title = "News Detail";
+}
+
+<h2>@Model.Title</h2>
+<img src="@Model.ImageUrl" alt="@Model.Title" />
+<p>@Model.ShortText</p>
+<a href="@Model.FullPath">Read more</a>
